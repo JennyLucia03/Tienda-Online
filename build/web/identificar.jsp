@@ -1,90 +1,68 @@
+<%-- 
+    Document   : index.jsp
+    Created on : 14/04/2023, 2:32:47 p. m.
+    Author     : User
+--%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Sistema | Iniciar Session</title>
-  <!-- Tell the browser to be responsive to screen width -->
-  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-  <!-- Bootstrap 3.3.7 -->
-  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="plugins/iCheck/square/blue.css">
-
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-</head>
-<body class="hold-transition login-page">
-<div class="login-box">
-  <div class="login-logo">
-    <a href="#"><b>Sistema Ventas </b>Bodega</a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="login-box-body">
-    <p class="login-box-msg">Iniciar Session</p>
-
-    <form action="srvUsuario?accion=verificar" method="POST">
-      <div class="form-group has-feedback">
-          <input type="text" name="txtUsu" id="txtUsu" value="" class="form-control"  placeholder="Usuario">
-        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-      </div>
-      <div class="form-group has-feedback">
-          <input type="password" name="txtPass" id="txtPass" value="" class="form-control" placeholder="******">
-        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-      </div>
-      <div class="row">
-        <div class="col-xs-8">
-          <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> Recuérdame
-            </label>
-          </div>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"><img src="img/boom.jpg" alt="55" width="55"/></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="srvUsuario?accion=home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="principal.jsp">¿Quienes somos?</a>
+                        </li>
+                    </ul>
+                    <div style="color:#FFFFFF; margin: 12px" class="pull-right">
+                        <a href="login.jsp" class="btn btn-outline-success">Iniciar Sesion</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div class="container mt-2">
+            <div class="row">
+                <c:forEach var="p" items="${productos}">
+                    <div class="col-sm-4">
+                        <div class="card">
+                            <div align="center" class="card-header">
+                                <label>${p.getNombres()}</label>
+                            </div>
+                            <div class="card-body" align="center">
+                                <img src="ControladorIMG?id=${p.getId()}" width="200" height="180">
+                                <br>
+                                <i>$.${p.getPrecio()}</i>
+                            </div>
+                            <div class="card-footer text-center">
+                                <label>${p.getDescripcion()}</label>
+                                <div>
+                                    <a href="login.jsp" class="btn btn-outline-info">Agregar a carrito</a>
+                                    <a href="login.jsp" class="btn btn-outline-danger">Comprar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
+            </div>
         </div>
-        <!-- /.col -->
-        <div class="col-xs-4">
-          <input type="submit" name="verificar" value="Verificar" class="btn btn-primary btn-block"/>
-        </div>
-        <!-- /.col -->
-      </div>
-    </form>
-
-    <div class="social-auth-links text-center">
-      <p>- Verificación Credenciales -</p>
-      <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-info"></i> Mensaje: 
-        ${msje}</a>
-    </div>
-    <!-- /.social-auth-links -->
-
-    <a href="#">Olvide mi contraseña</a><br>
-    <a href="#" class="text-center">Register un nuevo usuario</a>
-
-  </div>
-  <!-- /.login-box-body -->
-</div>
-<!-- /.login-box -->
-
-<!-- jQuery 3 -->
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap 3.3.7 -->
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- iCheck -->
-<script src="plugins/iCheck/icheck.min.js"></script>
-<script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' /* optional */
-    });
-  });
-</script>
-</body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    </body>
 </html>
-
